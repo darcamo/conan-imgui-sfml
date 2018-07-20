@@ -32,14 +32,14 @@ matrix:
       - <<: *linux
         env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=darcamo/conangcc7 CONAN_BUILD_TYPES=Debug
 
-      - <<: *linux
-        env: CONAN_CLANG_VERSIONS=5.0 CONAN_DOCKER_IMAGE=lasote/conanclang50 CONAN_BUILD_TYPES=Release
+      # - <<: *linux
+      #   env: CONAN_CLANG_VERSIONS=5.0 CONAN_DOCKER_IMAGE=lasote/conanclang50 CONAN_BUILD_TYPES=Release
 
       - <<: *linux
         env: CONAN_CLANG_VERSIONS=6.0 CONAN_DOCKER_IMAGE=darcamo/archconanclang CONAN_BUILD_TYPES=Release
 
-      - <<: *linux
-        env: CONAN_CLANG_VERSIONS=5.0 CONAN_DOCKER_IMAGE=lasote/conanclang50 CONAN_BUILD_TYPES=Debug
+      # - <<: *linux
+      #   env: CONAN_CLANG_VERSIONS=5.0 CONAN_DOCKER_IMAGE=lasote/conanclang50 CONAN_BUILD_TYPES=Debug
 
       - <<: *linux
         env: CONAN_CLANG_VERSIONS=6.0 CONAN_DOCKER_IMAGE=darcamo/archconanclang CONAN_BUILD_TYPES=Debug
