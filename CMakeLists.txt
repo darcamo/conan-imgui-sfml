@@ -12,11 +12,12 @@ add_library(imgui-sfml
   imgui_draw.cpp
   imgui.h
   imgui_internal.h
+  imgui_widgets.cpp
+  imstb_rectpack.h
+  imstb_textedit.h
+  imstb_truetype.h
   imgui-SFML.cpp
   imgui-SFML.h
-  stb_rect_pack.h
-  stb_textedit.h
-  stb_truetype.h
   )
 
 target_include_directories(imgui-sfml SYSTEM PUBLIC .)
@@ -29,9 +30,9 @@ install(FILES
   imconfig.h
   imgui.h
   imgui_internal.h
+  imstb_rectpack.h
+  imstb_textedit.h
+  imstb_truetype.h
   imgui-SFML.h
-  stb_rect_pack.h
-  stb_textedit.h
-  stb_truetype.h
   DESTINATION include
   )

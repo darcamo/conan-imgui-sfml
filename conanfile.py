@@ -6,9 +6,12 @@ import glob
 
 class ImguisfmlConan(ConanFile):
     name = "imgui-sfml"
-    version = "1.53"  # Version of the imgui-library
-    version_imgui_sfml = ".1.0"  # Version of imgui-sfml corresponding to the
-                                 # version of imgui that it works with
+    version = "1.66b"  # Version of the imgui-library
+
+    # Commit of the ImGUI-SFML library -> its master is kept up to date with
+    # ImGUI releases, but it does not have proper releases. Therefore, here we
+    # add a commit version that works with the used ImGUI version
+    imgui_sfml_commit = "e5bc24e748c6732baa05c6be04bbd984d4159e60"
     license = "MIT"
     author = "Darlan Cavalcante Moreira (darcamo@gmail.com)"
     url = "https://github.com/darcamo/conan-recipes"
@@ -35,20 +38,33 @@ class ImguisfmlConan(ConanFile):
             installer.install(sfml_package_name)
 
     def source(self):
+        # Download ImGUI
+        tools.get("https://github.com/ocornut/imgui/archive/v{}.zip".format(self.version))
+        os.rename("imgui-{}".format(self.version), "imgui-sources")
+
         # Clone Imgui
-        imgui_git = tools.Git(folder="imgui")
-        imgui_git.clone("https://github.com/ocornut/imgui.git", 'v{0}'.format(self.version))
+        # imgui_git = tools.Git(folder="imgui")
+        # imgui_git.clone("https://github.com/ocornut/imgui.git", 'v{0}'.format(self.version))
+
+
+        # tools.get("https://github.com/eliasdaler/imgui-sfml/archive/v.{}.zip".format(self.version_imgui_sfml))
+        # os.rename("imgui-sfml-v.{}".format(self.version_imgui_sfml), "imgui-sfml-sources")
 
         # Clone Imgui-SFML
-        imgui_sfml_git = tools.Git(folder="imgui-sfml")
-        imgui_sfml_git.clone("https://github.com/eliasdaler/imgui-sfml.git", 'v{0}'.format(self.version_imgui_sfml))
+        imgui_sfml_git = tools.Git(folder="imgui-sfml-sources")
+        imgui_sfml_git.clone("https://github.com/eliasdaler/imgui-sfml.git")
+        imgui_sfml_git.checkout(self.imgui_sfml_commit)
 
         # Create the source folder where all files will be moved to
         os.mkdir("sources")
-        for file_name_and_path in glob.glob("imgui/*.h") + glob.glob("imgui/*.cpp"):
+
+        # Copy all files from imgui-sources to sources folder
+        for file_name_and_path in glob.glob("imgui-sources/*.h") + glob.glob("imgui-sources/*.cpp"):
             file_name = os.path.split(file_name_and_path)[-1]
             shutil.copy(file_name_and_path, os.path.join("sources", file_name))
-        for file_name_and_path in glob.glob("imgui-sfml/*.h") + glob.glob("imgui-sfml/*.cpp"):
+
+        # Copy all files from imgui-sfml-sources to sources folder
+        for file_name_and_path in glob.glob("imgui-sfml-sources/*.h") + glob.glob("imgui-sfml-sources/*.cpp"):
             file_name = os.path.split(file_name_and_path)[-1]
             shutil.copy(file_name_and_path, os.path.join("sources", file_name))
 
@@ -61,8 +77,8 @@ class ImguisfmlConan(ConanFile):
         tools.save("sources/imconfig.h", concatenated_content)
 
         # Now we can remove the imgui and imgui-sfml folders
-        shutil.rmtree("imgui/")
-        shutil.rmtree("imgui-sfml/")
+        shutil.rmtree("imgui-sources/")
+        shutil.rmtree("imgui-sfml-sources/")
 
         # In case of ubuntu find_package will not find SFML unless we indicate
         # to cmake where to find the FindSFML.cmake file
