@@ -14,7 +14,7 @@ class ImguisfmlConan(ConanFile):
     imgui_sfml_commit = "e5bc24e748c6732baa05c6be04bbd984d4159e60"
     license = "MIT"
     author = "Darlan Cavalcante Moreira (darcamo@gmail.com)"
-    url = "https://github.com/darcamo/conan-recipes"
+    url = "https://github.com/darcamo/conan-imgui-sfml"
     description = (
         "Dear ImGui: Bloat-free Immediate Mode Graphical User "
         "interface for C++ with minimal dependencies. This conan "

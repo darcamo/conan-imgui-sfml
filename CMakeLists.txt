@@ -25,7 +25,9 @@ target_link_libraries(imgui-sfml PUBLIC sfml-graphics sfml-window sfml-system sf
 target_link_libraries(imgui-sfml PUBLIC "-lGL")
 
 
+# Rule to install the compiled library
 install(TARGETS imgui-sfml DESTINATION lib)
+# Rule to install the headers
 install(FILES
   imconfig.h
   imgui.h
@@ -35,4 +37,14 @@ install(FILES
   imstb_truetype.h
   imgui-SFML.h
   DESTINATION include
+  )
+# Rule to install the source -> Usually this is not necessary, but since imgui
+# uses the source as documentation we also install the source in the conan cache
+install(FILES
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui-SFML.cpp
+  imgui_widgets.cpp
+  DESTINATION src
   )
