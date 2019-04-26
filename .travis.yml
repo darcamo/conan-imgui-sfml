@@ -33,10 +33,10 @@ matrix:
         env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=darcamo/conangcc7 CONAN_BUILD_TYPES=Debug
 
       - <<: *linux
-        env: CONAN_CLANG_VERSIONS=7.0 CONAN_DOCKER_IMAGE=darcamo/archconanclang CONAN_BUILD_TYPES=Release
+        env: CONAN_CLANG_VERSIONS=8 CONAN_DOCKER_IMAGE=darcamo/archconanclang CONAN_BUILD_TYPES=Release
 
       - <<: *linux
-        env: CONAN_CLANG_VERSIONS=7.0 CONAN_DOCKER_IMAGE=darcamo/archconanclang CONAN_BUILD_TYPES=Debug
+        env: CONAN_CLANG_VERSIONS=8 CONAN_DOCKER_IMAGE=darcamo/archconanclang CONAN_BUILD_TYPES=Debug
 
 install:
   - chmod +x .travis/install.sh

@@ -1,50 +1,39 @@
-#include <imgui.h>
 #include <imgui-SFML.h>
+#include <imgui.h>
 
+#include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
-#include <SFML/Graphics/CircleShape.hpp>
 
 #include <iostream>
 
-int main()
-{
-    // sf::RenderWindow window(sf::VideoMode(640, 480), "ImGui + SFML = <3");
-    // window.setFramerateLimit(60);
-    // ImGui::SFML::Init(window);
+int main(int, char **) {
+  ImGuiContext *context = ImGui::CreateContext();
+  ImGuiIO &io = ImGui::GetIO();
 
-    // sf::CircleShape shape(100.f);
-    // shape.setFillColor(sf::Color::Green);
+  // Build atlas
+  unsigned char *tex_pixels = NULL;
+  int tex_w, tex_h;
+  io.Fonts->GetTexDataAsRGBA32(&tex_pixels, &tex_w, &tex_h);
 
-    // sf::Clock deltaClock;
-    // while (window.isOpen()) {
-    //     sf::Event event;
-    //     while (window.pollEvent(event)) {
-    //         ImGui::SFML::ProcessEvent(event);
+  for (int n = 0; n < 50; n++) {
+    printf("NewFrame() %d\n", n);
+    io.DisplaySize = ImVec2(1920, 1080);
+    io.DeltaTime = 1.0f / 60.0f;
+    ImGui::NewFrame();
 
-    //         if (event.type == sf::Event::Closed) {
-    //             window.close();
-    //         }
-    //     }
+    static float f = 0.0f;
+    ImGui::Text("Hello, world!");
+    ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
+    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
+                1000.0f / io.Framerate, io.Framerate);
+    ImGui::ShowDemoWindow(NULL);
 
-    //     ImGui::SFML::Update(window, deltaClock.restart());
+    ImGui::Render();
+  }
 
-    //     ImGui::ShowTestWindow();
-
-    //     ImGui::Begin("Hello, world!");
-    //     ImGui::Button("Look at this pretty button");
-    //     ImGui::End();
-
-    //     window.clear();
-    //     window.draw(shape);
-    //     ImGui::SFML::Render(window);
-    //     window.display();
-    // }
-
-    // ImGui::SFML::Shutdown();
-
-    std::cout << "Test imgui-sfml finished" << std::endl;
-
-    return 0;
+  printf("DestroyContext()\n");
+  ImGui::DestroyContext(context);
+  return 0;
 }
