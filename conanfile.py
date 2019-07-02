@@ -6,7 +6,7 @@ import glob
 
 class ImguisfmlConan(ConanFile):
     name = "imgui-sfml"
-    version = "1.70"  # Version of the imgui-library
+    version = "1.71"  # Version of the imgui-library
 
     # Commit of the ImGUI-SFML library -> its master is kept up to date with
     # ImGUI releases, but it does not have proper releases. Therefore, here we
