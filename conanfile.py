@@ -6,12 +6,12 @@ import glob
 
 class ImguisfmlConan(ConanFile):
     name = "imgui-sfml"
-    version = "1.81"  # Version of the imgui-library
+    version = "1.83"  # Version of the imgui-library
 
     # Commit of the ImGUI-SFML library -> its master is kept up to date with
     # ImGUI releases, but it does not have proper releases. Therefore, here we
     # add a commit version that works with the used ImGUI version
-    imgui_sfml_commit = "757a4c6acea3132a8b1b6646d27b528f3b7e99c1"
+    imgui_sfml_commit = "a91ba69f7bd21d0a9aeb8c87493af58271988dca"
     license = "MIT"
     author = "Darlan Cavalcante Moreira (darcamo@gmail.com)"
     url = "https://github.com/darcamo/conan-imgui-sfml"
