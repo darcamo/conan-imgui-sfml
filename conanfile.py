@@ -11,7 +11,7 @@ class ImguisfmlConan(ConanFile):
     # Commit of the ImGUI-SFML library -> its master is kept up to date with
     # ImGUI releases, but it does not have proper releases. Therefore, here we
     # add a commit version that works with the used ImGUI version
-    imgui_sfml_commit = "a91ba69f7bd21d0a9aeb8c87493af58271988dca"
+    imgui_sfml_commit = "8bc196c5eaadb342712407eb06fc2f53edfde227"
     license = "MIT"
     author = "Darlan Cavalcante Moreira (darcamo@gmail.com)"
     url = "https://github.com/darcamo/conan-imgui-sfml"
@@ -22,7 +22,7 @@ class ImguisfmlConan(ConanFile):
         "\nSee https://github.com/eliasdaler/imgui-sfml")
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
-    default_options = "shared=False"
+    default_options = {"shared": False}
     generators = "cmake"
     exports_sources = "CMakeLists.txt"
 
